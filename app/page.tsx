@@ -12,7 +12,7 @@ const tools = [
     label: "Reviews",
     description: "Review collection and pay-period tracking.",
     status: "Live",
-    appHref: "#repstack-app",
+    appHref: "https://rep-stack-gilt.vercel.app",
     githubHref: "#repstack-github",
   },
   {
@@ -50,6 +50,12 @@ const workflow = [
   "RepOS supports ticket workflows",
   "RepGuard supports claim and evidence review",
 ];
+
+function externalLinkProps(href: string) {
+  return href.startsWith("http")
+    ? { target: "_blank", rel: "noreferrer" }
+    : {};
+}
 
 export default function Home() {
   return (
@@ -132,10 +138,18 @@ export default function Home() {
               </div>
               <p>{tool.description}</p>
               <div className="card-actions">
-                <a className="button primary" href={tool.appHref}>
+                <a
+                  className="button primary"
+                  href={tool.appHref}
+                  {...externalLinkProps(tool.appHref)}
+                >
                   Open App
                 </a>
-                <a className="button secondary" href={tool.githubHref}>
+                <a
+                  className="button secondary"
+                  href={tool.githubHref}
+                  {...externalLinkProps(tool.githubHref)}
+                >
                   View GitHub
                 </a>
               </div>
