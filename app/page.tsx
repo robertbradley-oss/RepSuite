@@ -191,8 +191,16 @@ export default function Home() {
 
       <footer className="footer">
         <span className="footer-lead">
-          <span className="footer-brand">RepSuite, 2026.</span> All your Rep
-          tools. One suite.
+          <LogoAsset
+            alt="RepSuite mark"
+            className="footer-mark"
+            fallback="RS"
+            src={logoAssets.markSrc}
+          />
+          <span className="footer-text">
+            <span className="footer-brand">RepSuite, 2026.</span>
+            <span className="footer-slogan">All your Rep tools. One suite.</span>
+          </span>
         </span>
         <span className="footer-right">
           <span className="footer-meta">Rep hub · v0.1</span>
