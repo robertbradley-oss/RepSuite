@@ -51,6 +51,13 @@ const tools = [
   },
 ];
 
+const workflow = [
+  "RepStack collects review data",
+  "RepReport formats and exports reviews",
+  "RepOS supports ticket workflows",
+  "RepGuard supports claim and evidence review",
+];
+
 function externalLinkProps(href: string) {
   return href.startsWith("http")
     ? { target: "_blank", rel: "noreferrer" }
@@ -187,6 +194,22 @@ export default function Home() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="section workflow-section" aria-labelledby="workflow-title">
+        <div className="section-head workflow-head">
+          <span className="eyebrow-mono">Workflow</span>
+          <h2 id="workflow-title">A simple path through the Rep ecosystem</h2>
+        </div>
+
+        <ol className="workflow-list">
+          {workflow.map((step, index) => (
+            <li className="workflow-step glass-strong refract" key={step}>
+              <span className="step-index">{index + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <footer className="footer">
