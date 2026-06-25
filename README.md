@@ -14,12 +14,31 @@ repository, and deployment.
 
 ## Projects
 
-- **RepSuite**: Static launcher hub and front door for the Rep tools ecosystem.
+### RepSuite
 
-- **RepStack**: Review collection and pay-period tracking.
-- **RepReport**: Review parsing and export helper.
-- **RepOS**: Customer support workflow and ticket operating system prototype.
-- **RepGuard**: Evidence and claim review workspace.
+The central launcher hub for the Rep tools ecosystem. RepSuite brings RepStack,
+RepReport, RepOS, and RepGuard into one polished front door without replacing
+the individual apps.
+
+### RepStack
+
+A review collection and tracking app built to manage review cards, pay periods,
+bonus estimates, promises, and export readiness.
+
+### RepReport
+
+A review parsing and export tool that turns collected review information into a
+clean report-ready format.
+
+### RepOS
+
+A customer support operating system prototype focused on cleaner ticket
+handling, internal workflows, and support team visibility.
+
+### RepGuard
+
+An evidence and claim review tool for organizing claim details, uploaded
+evidence, and risk signals in a cleaner workflow.
 
 ## Current MVP Scope
 
