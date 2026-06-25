@@ -12,7 +12,9 @@ RepSuite is a lightweight hub for navigating the current Rep toolset. It does
 not replace the individual apps; each tool keeps its own product surface,
 repository, and deployment.
 
-The current launcher includes:
+## Projects
+
+- **RepSuite**: Static launcher hub and front door for the Rep tools ecosystem.
 
 - **RepStack**: Review collection and pay-period tracking.
 - **RepReport**: Review parsing and export helper.
