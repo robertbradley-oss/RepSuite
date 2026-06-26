@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: "RepSuite",
   description: "The central hub for RepStack, RepReport, RepOS, and RepGuard.",
   icons: {
-    icon: "/repsuite-mark.png",
-    apple: "/repsuite-mark.png",
+    icon: "/favicon.png",
+    apple: "/favicon.png",
   },
   openGraph: {
     title: "RepSuite",
