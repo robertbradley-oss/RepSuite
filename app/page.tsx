@@ -1,8 +1,15 @@
+import { Fragment } from "react";
+import { AmbientBackground } from "./components/AmbientBackground";
+import { CommandPalette } from "./components/CommandPalette";
+import { HubConstellation } from "./components/HubConstellation";
 import { LogoAsset } from "./components/LogoAsset";
+import { SuiteStatus, type SuiteStatusTool } from "./components/SuiteStatus";
 
 const logoAssets = {
   markSrc: "/repsuite-mark.png",
 };
+
+const heroHeadline = "Your Rep tools, in one place.";
 
 const tools = [
   {
@@ -87,6 +94,7 @@ function GithubIcon() {
 export default function Home() {
   return (
     <main className="page-shell">
+      <AmbientBackground />
       <header className="topbar" aria-label="RepSuite">
         <a className="brand" href="#" aria-label="RepSuite home">
           <LogoAsset
@@ -102,41 +110,56 @@ export default function Home() {
             <span className="brand-tagline">All your Rep tools. One suite.</span>
           </span>
         </a>
+        <CommandPalette
+          tools={tools.map((tool) => ({
+            name: tool.name,
+            label: tool.label,
+            logoSrc: tool.logoSrc,
+            appHref: tool.appHref,
+            githubHref: tool.githubHref,
+          }))}
+        />
       </header>
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
           <span className="eyebrow">Rep tools launcher</span>
-          <h1 id="hero-title">Your Rep tools, in one place.</h1>
+          <h1 id="hero-title">
+            {heroHeadline.split(" ").map((word, index) => (
+              <Fragment key={`${word}-${index}`}>
+                {index > 0 ? " " : null}
+                <span
+                  className="h1-word"
+                  style={{ "--wi": index } as React.CSSProperties}
+                >
+                  {word}
+                </span>
+              </Fragment>
+            ))}
+          </h1>
           <p className="hero-sub">
             RepSuite is the central hub for RepStack, RepReport, RepOS, and
             RepGuard — a calm, frosted front door to every Rep tool.
           </p>
+          <HubConstellation
+            tools={tools.map((tool) => ({
+              name: tool.name,
+              logoSrc: tool.logoSrc,
+            }))}
+          />
         </div>
 
-        <aside className="hub-panel glass-strong refract" aria-label="Suite overview">
-          <div className="panel-head">
-            <span className="micro">Suite status</span>
-          </div>
-          <div className="mini-list">
-            {tools.map((tool) => (
-              <div className="mini-row" key={tool.name}>
-                <span className="mini-id">
-                  <LogoAsset
-                    alt={`${tool.name} logo`}
-                    className="chip-sm"
-                    fallback={tool.initials}
-                    src={tool.logoSrc}
-                  />
-                  {tool.name}
-                </span>
-                <span className={`badge ${tool.status.toLowerCase()}`}>
-                  {tool.status}
-                </span>
-              </div>
-            ))}
-          </div>
-        </aside>
+        <SuiteStatus
+          tools={tools.map(
+            (tool): SuiteStatusTool => ({
+              name: tool.name,
+              initials: tool.initials,
+              logoSrc: tool.logoSrc,
+              status: tool.status as SuiteStatusTool["status"],
+              appHref: tool.appHref,
+            }),
+          )}
+        />
       </section>
 
       <section className="section" id="launchpad" aria-labelledby="tools-title">
@@ -148,6 +171,7 @@ export default function Home() {
           {tools.map((tool) => (
             <article
               className="tool-card glass-strong refract"
+              data-tool={tool.name}
               key={tool.name}
               style={{ "--tool-accent": tool.accent } as React.CSSProperties}
             >
