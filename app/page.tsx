@@ -145,6 +145,7 @@ export default function Home() {
             tools={tools.map((tool) => ({
               name: tool.name,
               logoSrc: tool.logoSrc,
+              accent: tool.accent,
             }))}
           />
         </div>

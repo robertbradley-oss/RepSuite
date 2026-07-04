@@ -1197,6 +1197,38 @@ h2 {
   stroke-width: 1;
 }
 
+/* Particle stream flowing along each spoke, in the tool's accent. */
+.c-flow {
+  fill: none;
+  stroke: var(--spoke-accent, var(--teal));
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-dasharray: 1.5 7;
+  opacity: 0.35;
+  animation: cFlow 1.5s linear infinite;
+  transition: opacity 240ms var(--ease);
+}
+
+@keyframes cFlow {
+  to {
+    stroke-dashoffset: -8.5;
+  }
+}
+
+.c-spoke:hover .c-flow {
+  opacity: 0.85;
+}
+
+.c-halo {
+  fill: var(--spoke-accent, var(--teal));
+  opacity: 0.1;
+  transition: opacity 240ms var(--ease);
+}
+
+.c-spoke:hover .c-halo {
+  opacity: 0.2;
+}
+
 .c-node {
   fill: rgba(255, 255, 255, 0.72);
   stroke: rgba(15, 23, 42, 0.1);
@@ -1208,8 +1240,54 @@ h2 {
   stroke: rgba(13, 148, 136, 0.35);
 }
 
-.c-pulse {
+.c-comet {
+  fill: var(--spoke-accent, var(--teal));
+}
+
+.c-ripple {
+  fill: none;
+  stroke: var(--spoke-accent, var(--teal));
+  stroke-width: 1;
+}
+
+.c-out {
   fill: var(--teal);
+}
+
+.c-glow {
+  fill: url(#hubGlow);
+}
+
+.c-orbit {
+  fill: none;
+  stroke: rgba(13, 148, 136, 0.32);
+  stroke-width: 1;
+  stroke-dasharray: 3 6;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cSpin 16s linear infinite;
+}
+
+@keyframes cSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.c-twinkle {
+  fill: rgba(16, 35, 63, 0.35);
+  opacity: 0.12;
+  animation: cTwinkle 3.2s ease-in-out infinite;
+}
+
+@keyframes cTwinkle {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.55;
+  }
 }
 
 .c-ring {
@@ -1461,7 +1539,9 @@ h2 {
   }
 
   /* SMIL pulses and the cursor spotlight aren't CSS animations — hide them. */
-  .c-pulse,
+  .c-comet,
+  .c-out,
+  .c-ripple,
   .c-ring,
   .dot-grid {
     display: none;
