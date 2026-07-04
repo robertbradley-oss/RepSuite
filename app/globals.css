@@ -758,7 +758,7 @@ h2 {
 .card-watermark {
   position: absolute;
   right: -28px;
-  bottom: -24px;
+  bottom: 58px;
   width: 190px;
   height: 190px;
   z-index: 1;
