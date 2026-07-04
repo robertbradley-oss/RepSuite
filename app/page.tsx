@@ -167,6 +167,9 @@ export default function Home() {
               key={tool.name}
               style={{ "--tool-accent": tool.accent } as React.CSSProperties}
             >
+              <span aria-hidden="true" className="card-watermark">
+                <img alt="" src={tool.logoSrc} />
+              </span>
               <div className="card-top">
                 <LogoAsset
                   alt={`${tool.name} logo`}
