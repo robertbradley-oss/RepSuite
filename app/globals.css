@@ -765,7 +765,6 @@ h2 {
   pointer-events: none;
   opacity: 0.07;
   filter: grayscale(35%);
-  transform: rotate(-10deg);
   transition: opacity 220ms var(--ease), transform 220ms var(--ease);
 }
 
@@ -777,21 +776,17 @@ h2 {
 
 .tool-card:hover .card-watermark {
   opacity: 0.12;
-  transform: rotate(-6deg) scale(1.04);
+  transform: scale(1.03);
 }
 
-/* RepStack's mark is a dark filled stack — at ghost opacity it reads as a
-   blob rather than a silhouette. Fade it further and crop it deeper into
-   the corner so only a partial edge shows, matching the visual weight of
-   the three line-art marks. */
+/* RepStack's dark filled mark carries more ink than the line-art marks —
+   fade it a touch further so all four ghosts read at equal weight. */
 [data-tool="RepStack"] .card-watermark {
-  opacity: 0.045;
-  right: -64px;
-  bottom: -58px;
+  opacity: 0.055;
 }
 
 [data-tool="RepStack"]:hover .card-watermark {
-  opacity: 0.08;
+  opacity: 0.09;
 }
 
 .card-top {
