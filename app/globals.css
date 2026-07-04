@@ -780,6 +780,20 @@ h2 {
   transform: rotate(-6deg) scale(1.04);
 }
 
+/* RepStack's mark is a dark filled stack — at ghost opacity it reads as a
+   blob rather than a silhouette. Fade it further and crop it deeper into
+   the corner so only a partial edge shows, matching the visual weight of
+   the three line-art marks. */
+[data-tool="RepStack"] .card-watermark {
+  opacity: 0.045;
+  right: -64px;
+  bottom: -58px;
+}
+
+[data-tool="RepStack"]:hover .card-watermark {
+  opacity: 0.08;
+}
+
 .card-top {
   position: relative;
   z-index: 2;
