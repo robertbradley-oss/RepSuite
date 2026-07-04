@@ -695,7 +695,10 @@ h2 {
 .tool-card {
   display: flex;
   flex-direction: column;
-  min-height: 264px;
+  /* Fill the viewport below the hero so the card grid owns the first screen
+     and the footer sits below the fold. Open App is pinned to the card
+     bottom via .card-actions { margin-top: auto }. */
+  min-height: max(280px, calc(100vh - 545px));
   padding: 20px;
   border-radius: var(--r-xl);
   overflow: hidden;
