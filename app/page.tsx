@@ -40,7 +40,7 @@ const tools = [
     logoSrc: "/repos-mark.png",
     accent: "#6d49d4",
     label: "Support",
-    description: "Customer support workflow and ticket operating system prototype.",
+    description: "Customer support workflow and ticket operating system.",
     status: "Live",
     appHref: "https://rep-os.vercel.app",
     githubHref: "https://github.com/robertbradley-oss/RepOS",
