@@ -899,50 +899,6 @@ h2 {
   box-shadow: inset 0 0 0 1px var(--hairline), var(--ring);
 }
 
-/* Secondary "View GitHub" — quiet outline at rest, fills navy on hover (keeps the invert, fixed direction) */
-.gh-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 50px;
-  gap: 10px;
-  padding: 0 16px;
-  background: transparent;
-  border: 1px solid color-mix(in srgb, var(--navy) 26%, transparent);
-  border-radius: var(--r-full);
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--navy);
-  transition: background 300ms var(--ease), color 300ms var(--ease),
-    border-color 300ms var(--ease);
-}
-
-.gh-button .text {
-  color: inherit;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.gh-button svg {
-  width: 18px;
-  height: 18px;
-}
-
-.gh-button svg path {
-  fill: currentColor;
-}
-
-.gh-button:hover {
-  background: var(--navy);
-  border-color: var(--navy);
-  color: #fff;
-}
-
-.gh-button:focus-visible {
-  box-shadow: var(--ring);
-}
-
 .btn-secondary {
   background: var(--glass);
   -webkit-backdrop-filter: var(--blur);
