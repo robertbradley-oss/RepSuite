@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "check-links": "node scripts/check-links.mjs",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },

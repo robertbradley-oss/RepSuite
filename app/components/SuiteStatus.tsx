@@ -13,17 +13,14 @@ export type SuiteStatusTool = {
 
 type PingResult = {
   ok: boolean;
-  ms: number | null;
 };
 
 const PING_INTERVAL_MS = 45_000;
 
 /**
- * The Suite Status card, made alive: rows resolve one by one on load
- * (skeleton shimmer -> badge pops in), the two live apps are genuinely
- * pinged from the browser with their latency shown inline, a footer line
- * reports reachability and freshness, a glare follows the cursor across
- * the glass, and hovering a row lights up the matching tool card below.
+ * The Suite Status card keeps the launcher feeling alive without pretending to
+ * be an uptime monitor: rows resolve one by one, live app links get a browser
+ * reachability check, and the footer reports the freshness of that local check.
  */
 export function SuiteStatus({ tools }: { tools: SuiteStatusTool[] }) {
   const [resolvedCount, setResolvedCount] = useState(0);
@@ -43,22 +40,19 @@ export function SuiteStatus({ tools }: { tools: SuiteStatusTool[] }) {
     return () => timers.forEach((timer) => window.clearTimeout(timer));
   }, [tools]);
 
-  // Really check the live apps. no-cors keeps it CORS-safe: the response is
-  // opaque, but resolve/reject still tells us reachable vs not, and the
-  // round-trip time is real.
+  // Check that live app links can be reached by this browser. no-cors keeps it
+  // CORS-safe, but the opaque response cannot prove service health.
   useEffect(() => {
     let cancelled = false;
     async function checkLiveApps() {
       const liveTools = tools.filter((tool) => tool.status === "Live");
       const entries = await Promise.all(
         liveTools.map(async (tool) => {
-          const started = performance.now();
           try {
             await fetch(tool.appHref, { mode: "no-cors", cache: "no-store" });
-            const ms = Math.round(performance.now() - started);
-            return [tool.name, { ok: true, ms }] as const;
+            return [tool.name, { ok: true }] as const;
           } catch {
-            return [tool.name, { ok: false, ms: null }] as const;
+            return [tool.name, { ok: false }] as const;
           }
         }),
       );
@@ -102,7 +96,7 @@ export function SuiteStatus({ tools }: { tools: SuiteStatusTool[] }) {
   const liveTotal = tools.filter((tool) => tool.status === "Live").length;
   const liveReachable = Object.values(pings).filter((ping) => ping.ok).length;
 
-  let footLabel = "Checking live apps…";
+  let footLabel = "Checking app links…";
   if (checkedAt !== null) {
     const agoSeconds = Math.max(0, Math.round((nowTick - checkedAt) / 1000));
     const agoLabel =
@@ -111,7 +105,7 @@ export function SuiteStatus({ tools }: { tools: SuiteStatusTool[] }) {
         : agoSeconds < 60
           ? `checked ${agoSeconds}s ago`
           : `checked ${Math.round(agoSeconds / 60)}m ago`;
-    footLabel = `${liveReachable} of ${liveTotal} live apps reachable · ${agoLabel}`;
+    footLabel = `${liveReachable} of ${liveTotal} app links reachable from this browser · ${agoLabel}`;
   }
 
   return (
@@ -144,11 +138,11 @@ export function SuiteStatus({ tools }: { tools: SuiteStatusTool[] }) {
                   src={tool.logoSrc}
                 />
                 {tool.name}
-                {resolved && tool.status === "Live" && ping?.ok && ping.ms !== null && (
-                  <span className="mini-ping">{ping.ms}ms</span>
+                {resolved && tool.status === "Live" && ping?.ok && (
+                  <span className="mini-ping">opens</span>
                 )}
                 {resolved && tool.status === "Live" && ping && !ping.ok && (
-                  <span className="mini-ping is-down">offline</span>
+                  <span className="mini-ping is-down">blocked</span>
                 )}
               </span>
               {resolved ? (

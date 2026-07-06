@@ -4,59 +4,13 @@ import { CommandPalette } from "./components/CommandPalette";
 import { HubConstellation } from "./components/HubConstellation";
 import { LogoAsset } from "./components/LogoAsset";
 import { SuiteStatus, type SuiteStatusTool } from "./components/SuiteStatus";
+import { tools } from "./tools";
 
 const logoAssets = {
   markSrc: "/repsuite-mark.png",
 };
 
 const heroHeadline = "Your Rep tools, in one place.";
-
-const tools = [
-  {
-    name: "RepStack",
-    initials: "RS",
-    logoSrc: "/repstack-mark.png",
-    accent: "#2563eb",
-    label: "Reviews",
-    description: "Review collection and pay-period tracking.",
-    status: "Live",
-    appHref: "https://rep-stack-gilt.vercel.app",
-    githubHref: "https://github.com/robertbradley-oss/RepStack",
-  },
-  {
-    name: "RepReport",
-    initials: "RR",
-    logoSrc: "/repreport-mark.png",
-    accent: "#2ea44f",
-    label: "Exports",
-    description: "Review parsing and export helper.",
-    status: "Live",
-    appHref: "https://repreport-beige.vercel.app",
-    githubHref: "https://github.com/robertbradley-oss/RepReport",
-  },
-  {
-    name: "RepOS",
-    initials: "OS",
-    logoSrc: "/repos-mark.png",
-    accent: "#6d49d4",
-    label: "Support",
-    description: "Customer support workflow and ticket operating system.",
-    status: "Live",
-    appHref: "https://rep-os.vercel.app",
-    githubHref: "https://github.com/robertbradley-oss/RepOS",
-  },
-  {
-    name: "RepGuard",
-    initials: "RG",
-    logoSrc: "/repguard-mark.png",
-    accent: "#b8801f",
-    label: "Claims",
-    description: "Evidence and claim review workspace.",
-    status: "Live",
-    appHref: "https://claimguard-taupe.vercel.app",
-    githubHref: "https://github.com/robertbradley-oss/RepGuard",
-  },
-];
 
 function externalLinkProps(href: string) {
   return href.startsWith("http")
@@ -147,7 +101,7 @@ export default function Home() {
               name: tool.name,
               initials: tool.initials,
               logoSrc: tool.logoSrc,
-              status: tool.status as SuiteStatusTool["status"],
+              status: tool.status,
               appHref: tool.appHref,
             }),
           )}
