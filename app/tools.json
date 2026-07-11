@@ -36,7 +36,7 @@
     "name": "RepGuard",
     "initials": "RG",
     "logoSrc": "/repguard-mark.png",
-    "accent": "#b8801f",
+    "accent": "#e5483d",
     "label": "Claims",
     "description": "Evidence and claim review workspace.",
     "status": "Live",
