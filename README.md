@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/repsuite-logo.png" alt="RepSuite" width="760">
+</p>
+
 # RepSuite
 
 RepSuite is the static front door for the Rep tools ecosystem. It gives the
