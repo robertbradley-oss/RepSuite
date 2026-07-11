@@ -40,7 +40,7 @@
     "label": "Claims",
     "description": "Evidence and claim review workspace.",
     "status": "Live",
-    "appHref": "https://claimguard-taupe.vercel.app",
+    "appHref": "https://repguard-app.vercel.app",
     "githubHref": "https://github.com/robertbradley-oss/RepGuard"
   }
 ]
