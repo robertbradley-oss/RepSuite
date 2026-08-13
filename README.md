@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/repsuite-logo.png" alt="RepSuite" width="760">
+  <img src="docs/assets/repsuite-logo-transparent.png" alt="RepSuite" width="480">
 </p>
 
 # RepSuite
