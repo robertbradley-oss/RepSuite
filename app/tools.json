@@ -7,8 +7,7 @@
     "label": "Reviews",
     "description": "Review collection and pay-period tracking.",
     "status": "Live",
-    "appHref": "https://rep-stack-gilt.vercel.app",
-    "githubHref": "https://github.com/robertbradley-oss/RepStack"
+    "appHref": "https://rep-stack-gilt.vercel.app"
   },
   {
     "name": "RepReport",

@@ -41,7 +41,7 @@ async function checkUrl(label, href) {
 
 const checks = tools.flatMap((tool) => [
   checkUrl(`${tool.name} app`, tool.appHref),
-  checkUrl(`${tool.name} GitHub`, tool.githubHref),
+  ...(tool.githubHref ? [checkUrl(`${tool.name} GitHub`, tool.githubHref)] : []),
 ]);
 
 const results = await Promise.allSettled(checks);

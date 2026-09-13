@@ -11,7 +11,7 @@ export type RepTool = {
   description: string;
   status: ToolStatus;
   appHref: string;
-  githubHref: string;
+  githubHref?: string;
 };
 
 function normalizeStatus(status: string): ToolStatus {

@@ -7,7 +7,7 @@ export type PaletteTool = {
   label: string;
   logoSrc: string;
   appHref: string;
-  githubHref: string;
+  githubHref?: string;
 };
 
 type PaletteAction = {
@@ -56,12 +56,12 @@ export function CommandPalette({ tools }: { tools: PaletteTool[] }) {
         href: tool.appHref,
         logoSrc: tool.logoSrc,
       })),
-      ...tools.map((tool) => ({
+      ...tools.flatMap((tool) => tool.githubHref ? [{
         id: `github-${tool.name}`,
         title: `${tool.name} on GitHub`,
         hint: "Repository",
         href: tool.githubHref,
-      })),
+      }] : []),
     ],
     [tools],
   );
