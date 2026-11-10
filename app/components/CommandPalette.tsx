@@ -37,6 +37,7 @@ export function CommandPalette({ tools }: { tools: PaletteTool[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [modLabel, setModLabel] = useState("⌘");
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     const isApple = /Mac|iPhone|iPad/.test(
@@ -85,8 +86,6 @@ export function CommandPalette({ tools }: { tools: PaletteTool[] }) {
         setOpen((wasOpen) => !wasOpen);
         setQuery("");
         setActiveIndex(0);
-      } else if (event.key === "Escape") {
-        setOpen(false);
       }
     }
     window.addEventListener("keydown", onKeyDown);
@@ -94,14 +93,17 @@ export function CommandPalette({ tools }: { tools: PaletteTool[] }) {
   }, []);
 
   useEffect(() => {
-    if (open) {
-      inputRef.current?.focus();
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.documentElement.style.overflow = "";
-    }
+    if (!open) return;
+    const dialog = dialogRef.current;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousOverflow = document.documentElement.style.overflow;
+    dialog?.showModal();
+    inputRef.current?.focus();
+    document.documentElement.style.overflow = "hidden";
     return () => {
-      document.documentElement.style.overflow = "";
+      dialog?.close();
+      document.documentElement.style.overflow = previousOverflow;
+      if (previousFocus?.isConnected) previousFocus.focus();
     };
   }, [open]);
 
@@ -138,13 +140,26 @@ export function CommandPalette({ tools }: { tools: PaletteTool[] }) {
         <kbd>{modLabel} K</kbd>
       </button>
 
-      {open && (
-        <div
+        <dialog
           aria-label="Command palette"
           aria-modal="true"
           className="palette-overlay"
           onClick={() => setOpen(false)}
-          role="dialog"
+          onCancel={(event) => {
+            event.preventDefault();
+            setOpen(false);
+          }}
+          onKeyDown={(event) => {
+            if (event.key !== "Tab") return;
+            const controls = event.currentTarget.querySelectorAll<HTMLElement>("input, button:not(:disabled)");
+            const first = controls[0];
+            const last = controls[controls.length - 1];
+            if (document.activeElement === (event.shiftKey ? first : last)) {
+              event.preventDefault();
+              (event.shiftKey ? last : first)?.focus();
+            }
+          }}
+          ref={dialogRef}
         >
           <div className="palette-panel" onClick={(event) => event.stopPropagation()}>
             <input
@@ -200,8 +215,7 @@ export function CommandPalette({ tools }: { tools: PaletteTool[] }) {
               </span>
             </div>
           </div>
-        </div>
-      )}
+        </dialog>
     </>
   );
 }
